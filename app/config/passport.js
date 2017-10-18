@@ -30,6 +30,7 @@ module.exports = function (passport) {
         if(user) {
           return done(null, user);
         } else {
+          //create new user if none from profile  info return
           var newUser = new User();
 
           newUser.github.id= profile.id;
