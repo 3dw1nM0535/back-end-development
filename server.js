@@ -3,13 +3,12 @@ var express = require('express');
 var routes = require('./app/routes/index');
 var mongoose = require('mongoose');
 
-var url = 'mongodb://localhost:27017/clementinejs';
 
 //Start the express module
 var app = express();
 
 //Connect to database
-mongoose.connect(url, { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/clementinejs', { useMongoClient: true });
 
 //mongoose Promise Middleware
 mongoose.Promise = global.Promise;
