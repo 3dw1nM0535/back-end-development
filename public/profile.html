@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="http://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" type="text/css">
+  <link href="/public/css/main.css" rel="stylesheet" type="text/css">
+  <title>Full Stack App - Clementinejs as the boilerplate for full stack app development</title>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="github-profile">
+      <img src="/public/img/gh-mark-32px.png" alt="github-logo" />
+      <p><span>ID:</span><span id="profile-id" class="profile-value"></span></p>
+      <p><span>Username: </span><span id="profile-username" class="profile-value"></span></p>
+      <p><span>Display Name: </span><span id="display-name" class="profile-value"></span></p>
+      <p><span>Repositories: </span><span id="profile-repos" class="profile-value"></span></p>
+      <a href="/" class="menu">Home</a>
+      <p id="menu-divide"> | </p>
+      <a class="menu" href="/logout">Logout</a>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/common/ajax-functions.js"></script>
+  <script type="text/javascript" src="/controllers/userController.client.js"></script>
+</body>
+</html>
