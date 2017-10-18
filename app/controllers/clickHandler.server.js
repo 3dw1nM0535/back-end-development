@@ -1,30 +1,25 @@
+//Import Schema for data entry validation
+var Clicks = require('../models/clicks');
+
 //Server-side controller to handle data between database and API
-function clickHandler (db) {
-  var clicks = db.collection('clicks');
+function clickHandler () {
 
   this.getClicks = function (req, res) {
-    var clickProjection = { _id: false };
-
-    clicks.findOne({}, clickProjection, function (err, result) {
-      if (err) {
+    Clicks.findOne({}, { _id: false }).exec(function (err, result) {
+      if (err) { 
         throw err;
       }
 
       if (result) {
         res.json(result);
       } else {
-        clicks.insert({ clicks: 0 }, function (err) {
-          if (err) { 
+        var newDoc = new Clicks({ 'clicks': 0 });
+        newDoc.save(function (err, doc) {
+          if (err) {
             throw err;
           }
 
-          clicks.findOne({}, clickProjection, function (err, docs) {
-            if (err) {
-              throw err;
-            }
-
-            res.json(docs);
-          });
+          res.json(doc);
         });
       }
     });
@@ -32,7 +27,7 @@ function clickHandler (db) {
 
   this.addClicks = function (req, res) {
 
-    clicks.findAndModify({}, { _id: 1 }, { $inc: { 'clicks': 1 } }, function (err, result) {
+    Clicks.findAndModify({}, { _id: 1 }, { $inc: { 'clicks': 1 } }, function (err, result) {
       if (err) {
         throw err;
       }
