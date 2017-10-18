@@ -6,7 +6,7 @@ var app = express();
 
 //Get home route
 app.get('/', function (req, res) {
-  res.send('Hello world!');
+  res.sendFile(process.cwd() + '/index.html' );
 });
 
 //Server init
