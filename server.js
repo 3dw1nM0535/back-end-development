@@ -2,13 +2,30 @@
 var express = require('express'); 
 var routes = require('./app/routes/index');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
 
 
 //Start the express module
 var app = express();
 
+require('dotenv').load();
+require('./app/config/passport')(passport);
+
+//session Middleware
+app.use(session({
+  secret: 'secretEdwin',
+  resave: false,
+  saveUninitialized: true
+}));
+
+//passport initialize Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 //Connect to database
-mongoose.connect('mongodb://localhost:27017/clementinejs', { useMongoClient: true });
+mongoose.connect(process.env.MONGO_URI, { useMongoClient: true });
 
 //mongoose Promise Middleware
 mongoose.Promise = global.Promise;
@@ -17,11 +34,14 @@ mongoose.Promise = global.Promise;
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 
-routes(app);
+routes(app, passport);
+
+//Port definition
+var port = process.env.PORT || 8080;
 
 //Server init
 app.listen(8080, function () {
-  console.log('Server running on port 8080!');
+  console.log('Server listening on port ' + port + '!');
 });
 
 
