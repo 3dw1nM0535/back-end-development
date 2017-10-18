@@ -26,23 +26,22 @@ function clickHandler () {
   };
 
   this.addClicks = function (req, res) {
-
-    Clicks.findAndModify({}, { _id: 1 }, { $inc: { 'clicks': 1 } }, function (err, result) {
+    Clicks.findOneAndUpdate({}, { $inc: { 'clicks': 1 } }).exec(function (err, docs) {
       if (err) {
         throw err;
       }
 
-      res.json(result);
+      res.json(docs);
     });
   };
 
   this.resetClicks = function (req, res) {
-    clicks.update({}, { 'clicks': 0 }, function (err, result) {
+    Clicks.findOneAndUpdate({}, { 'clicks': 0 }).exec(function (err, docs) {
       if (err) {
         throw err;
       }
 
-      res.json(result);
+      res.json(docs);
     });
   };
 }
