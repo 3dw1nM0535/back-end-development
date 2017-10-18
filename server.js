@@ -12,7 +12,7 @@ mongo.connect(url, function (err, db) {
   if(err) {
     throw new Error('Database failed to connect!');
   } else {
-    console.log('Coonection to databse was successfull!');
+    console.log('Connection to databse was successfull!');
   }
 
   //Static file Middleware
