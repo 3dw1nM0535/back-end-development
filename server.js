@@ -33,6 +33,7 @@ mongoose.Promise = global.Promise;
 //Static file Middleware
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
+app.use('/common', express.static(process.cwd() + '/app/common'));
 
 routes(app, passport);
 
@@ -43,6 +44,4 @@ var port = process.env.PORT || 8080;
 app.listen(8080, function () {
   console.log('Server listening on port ' + port + '!');
 });
-
-
 
