@@ -1,14 +1,15 @@
-var ClickHandler= require(process.cwd() + '/app/controllers/clickHandler.server');
+var path = process.cwd();
 
+var ClickHandler= require(path + '/app/controllers/clickHandler.server');
 
 //Home route definition and api 
 
-module.exports = function (app, db) {
+module.exports = function (app) {
 
   var clickHandler = new ClickHandler(db);
 
   app.route('/').get(function (req, res) {
-    res.sendFile(process.cwd() + '/public/index.html');
+    res.sendFile(path + '/public/index.html');
   });
 
   app.route('/api/clicks').get(clickHandler.getClicks)
