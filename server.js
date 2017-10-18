@@ -11,11 +11,14 @@ var app = express();
 //Connect to database
 mongoose.connect(url, { useMongoClient: true });
 
+//mongoose Promise Middleware
+mongoose.Promise = global.Promise;
+
 //Static file Middleware
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 
-routes(app, db);
+routes(app);
 
 //Server init
 app.listen(8080, function () {
